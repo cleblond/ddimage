@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <style type="text/css">
+
+    </style>
+    <script src="/tsugi/mod/openochem/js/jquery-3.1.1.min.js"></script>
+
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+	
+	<script src="/tsugi/mod/openochem/js/kekule_libs/raphael-min.2.0.1.js"></script>
+    <script src="/tsugi/mod/openochem/js/kekule_libs/raphael.export.js"></script>
+    <script src="/tsugi/mod/openochem/js/kekule_libs/three.min.js"></script>
+
+    <script src="/tsugi/mod/openochem/js/kekule_libs/dist/kekule.js?modules=widget,chemWidget,io"></script>
+	
+	
+	<script>
+	
+$( document).ready(function() {
+	    console.log("INITED");	
+		
+    var viewerAnswerIds = ['viewerProduct1'];
+    
+    function prepareDropableViewer()
+    {
+    
+      console.log(viewerAnswerIds);
+      for (var i = 0; i < viewerAnswerIds.length; ++i)
+      {
+        var viewerId = viewerAnswerIds[i];
+        var viewer = Kekule.Widget.getWidgetById(viewerId);
+        viewer
+		  .setEnableToolbar(true)
+		  .setEnableDirectInteraction(true)
+		  .setEnableEdit(true)
+		  .setToolButtons(['openEditor',
+		  {
+		    'text': 'Custom',  // button caption
+		    'htmlClass': 'K-Widget-Grid-Button-Remove',  // show a OK icon
+		    'showText': false,   // display caption of button
+		    '#execute': function(){ deleteViewer(viewerId); }  // event handler when executing the button
+		  }
+		  
+		  ]);
+  
+        var mol = new Kekule.Molecule();
+        viewer.setChemObj(mol);
+      }
+    };
+    
+    
+    function addDropStructure()
+    {
+        console.log("ADD ADROP Struct");
+        var d = new Date();
+        var uid = d.valueOf();
+    
+	    $("#dd-dropable").append('<li class="ui-state-default"><div class="structure" id="viewerProduct'+uid+'" data-widget="Kekule.ChemWidget.Viewer2D" data-predefined-setting="editOnly" data-auto-size="true"></div><input class="provided-cntrl" type="checkbox" id="p'+uid+'"></li>');
+	
+        //function prepareViewer(id, type, hidecntrls=false, editbtn=true, deletebtn=true)	
+	    prepareDropableViewer("viewerProduct"+uid, "structure", false);
+
+    }
+		
+		
+    function init()
+    {
+         
+    //If it isn't "undefined" and it isn't "null", then it exists.
+        var dropbtn = document.getElementById("btnAddDropStructure");
+        console.log(dropbtn);
+
+              console.log(Kekule.Widget.getWidgetById());
+              console.log(Kekule.Widget.getWidgetById("btnAddDropStructure"));
+              Kekule.Widget.getWidgetById('btnAddDropStructure').addEventListener('execute', addDropStructure);
+              Kekule.Widget.getWidgetById('btnAddDropStructure').htmlClassName = "btn btn-default";
+
+        
+    }
+    
+        init();
+    
+});
+
+
+</script>
+
+
+<body>
+
+
+    <img id="bgimage" src = "monosubstituted_arenes.png" />
+
+    <ul id="dd-dropable" class="center">
+
+    </ul>
+
+
+    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+    <button class="btn btn-default" id="btnAddDropStructure" data-widget="Kekule.Widget.Button" data-text="<i class='fa fa-plus' aria-hidden='true'></i> Structure"></button>
+    </div>
+</body>
+</html>
+
+
