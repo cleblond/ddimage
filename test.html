@@ -92,25 +92,7 @@
 
     }
     
-     .reagent
-    {
-      cursor: pointer;
-      width: 150px;
-      height: 150px;
-      border-radius: 20px;
-    }
-      
-    
-    
-    
-    .reagent-tab
-    {
-      cursor: pointer;
-      width: 120px;
-      height: 120px;
-      border: 2px dashed #ccc;
-    }
-    
+
     
     .Key
     {
@@ -228,7 +210,7 @@ $( document).ready(function() {
                       BNS.molRadicalDoublet
                     ]
                   }
-                ]
+                ].setEnableDirectInteraction(true)
                  });
                  
                  
@@ -248,7 +230,7 @@ $( document).ready(function() {
         var d = new Date();
         var uid = d.valueOf();
     
-	$("#dd-dropable").append('<li class="syn_notprovided ui-state-default"><div class="structure" id="viewerProduct'+uid+'" data-widget="Kekule.ChemWidget.Viewer2D" data-predefined-setting="editOnly" data-auto-size="true" data-auto-fit="true"></div></li>');
+	$("#dd-dropable").append('<span draggable="true" class="syn_notprovided" style="width:150px;height:150px"  id="viewerProduct'+uid+'" data-widget="Kekule.ChemWidget.Viewer2D" data-predefined-setting="editOnly" data-autofit="true"></span>');
 	
     //function prepareViewer(id, type, hidecntrls=false, editbtn=true, deletebtn=true)	
 	prepareDropableViewer("viewerProduct"+uid, "structure", false);
@@ -288,14 +270,17 @@ $( document).ready(function() {
 </script>
 
 
+
+
 <body>
 
-
+    <div class="img-container" style="height:100%; width">
     <img id="bgimage" src = "monosubstituted_arenes.png" />
+    </div>
 
-    <ul id="dd-dropable" class="center">
+    <div id="dd-dropable" class="center">
 
-    </ul>
+    </div>
 
 
     <div class="btn-group btn-group-sm" role="group" aria-label="...">
