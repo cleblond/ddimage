@@ -3,12 +3,158 @@
 
 
     <style type="text/css">
+#syn.fullscreen{
+    z-index: 9999;
+    background: #FFF;
+    width: 100%; 
+    height: 100%; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+ }
+
+ #syn-container{ 
+    height: 100%; 
+    
+ }
+
+
+.syn_provided {
+
+
+    border: 2px dashed blue;
+    border-radius: 20px;
+
+}
+
+.syn_notprovided {
+
+
+    border: 2px dashed #15cf15;
+    border-radius: 20px;
+
+} 
+
+    #dd-dropable 
+    
+    { 
+    display: flex;
+    flex-wrap:wrap;
+    list-style-type: none;
+    margin: 10px;
+    padding: 10px; 
+    min-height: 200px;
+    border: 1px dotted #ccc;
+    border-radius: 20px;
+    }
+    
+    .syn-path-container {
+    min-height: 200px;
+    border: 3px dotted #ccc;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+    
+    }
+    
+    #dd-dropable li { margin: 3px 3px 3px 10px; padding: 1px; float: left; /*width: 100px; height: 90px;*/ font-size: 4em; text-align: center; }
+    #reagents { list-style-type: none; margin: 0; padding: 0; /*width: 450px;*/ }
+    #reagents li { margin: 3px 3px 3px 10px; padding: 1px; float: left; /*width: 100px; height: 90px;*/ font-size: 4em; text-align: center; }
+    
+
+    .syn-path 
+    
+    { 
+    display: flex;
+    flex-wrap:wrap;
+    list-style-type: none;
+    margin: 10px;
+    padding: 10px;
+    /*width: 100%;*/
+    min-height: 200px;
+    border: 3px dotted #ccc;
+    border-radius: 20px;
+    }
+
+.clear {
+    clear: both;
+}
+
+    .syn-path li { margin: 3px 3px 3px 10px; padding: 1px; float: left; /*width: 100px; height: 90px;*/ font-size: 4em; text-align: center; }
+    
+
+    .structure
+    {
+      cursor: pointer;
+      width: 150px;
+      height: 150px;
+      border-radius: 20px;
+
+    }
+    
+     .reagent
+    {
+      cursor: pointer;
+      width: 150px;
+      height: 150px;
+      border-radius: 20px;
+    }
+      
+    
+    
+    
+    .reagent-tab
+    {
+      cursor: pointer;
+      width: 120px;
+      height: 120px;
+      border: 2px dashed #ccc;
+    }
+    
+    
+    .Key
+    {
+        border: 2px dotted #ff0000;
+        visibility: hidden;
+    }
+
+    .ResultMark
+    {
+      width: 48px;
+      height: 48px;
+      background-repeat: no-repeat;
+    }
+    .Correct
+    {
+      background-image: url(../styles/images/good.png);
+    }
+    .Wrong
+    {
+      background-image: url(../styles/images/error.png);
+    }
+    
+    .center {
+    display: flex-wrap;
+    justify-content: left;
+    align-items: center;
+    /*border: 1px solid;*/ 
+    }
+
+
+
+
+
+
+
+
+
+
 
     </style>
     <script src="/tsugi/mod/openochem/js/jquery-3.1.1.min.js"></script>
 
 	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
-	
+    <link rel="stylesheet" type="text/css" href="/tsugi/mod/openochem/js/kekule_libs/dist/themes/default/kekule.css" >	
 	<script src="/tsugi/mod/openochem/js/kekule_libs/raphael-min.2.0.1.js"></script>
     <script src="/tsugi/mod/openochem/js/kekule_libs/raphael.export.js"></script>
     <script src="/tsugi/mod/openochem/js/kekule_libs/three.min.js"></script>
@@ -23,47 +169,101 @@ $( document).ready(function() {
 		
     var viewerAnswerIds = ['viewerProduct1'];
     
-    function prepareDropableViewer()
+    function prepareDropableViewer(id, type, hidecntrls=false, editbtn=true, deletebtn=true)
     {
     
-      console.log(viewerAnswerIds);
-      for (var i = 0; i < viewerAnswerIds.length; ++i)
-      {
-        var viewerId = viewerAnswerIds[i];
-        var viewer = Kekule.Widget.getWidgetById(viewerId);
-        viewer
-		  .setEnableToolbar(true)
-		  .setEnableDirectInteraction(true)
-		  .setEnableEdit(true)
-		  .setToolButtons(['openEditor',
-		  {
-		    'text': 'Custom',  // button caption
-		    'htmlClass': 'K-Widget-Grid-Button-Remove',  // show a OK icon
-		    'showText': false,   // display caption of button
-		    '#execute': function(){ deleteViewer(viewerId); }  // event handler when executing the button
-		  }
+    var viewerId = id;
+    var viewer = new Kekule.ChemWidget.Viewer(document.getElementById(viewerId));
+    
+
+			viewer
+			.setEnableEdit(true)
+			.setEnableToolbar(true)
+			.setEnableDirectInteraction(true)
+			.setToolButtons(['openEditor',
+				  {
+				    'text': 'Custom',  // button caption
+				    'htmlClass': 'K-Widget-Grid-Button-Remove',  // show a OK icon
+				    'showText': false,   // display caption of button
+				    '#execute': function(){ deleteViewer(viewerId); }  // event handler when executing the button
+				  }
+		     ]);
+		 
+             
+		                 
+		 //set options for editor
+	     var renderConfigs = new Kekule.Render.Render2DConfigs();
+	     renderConfigs.getColorConfigs().setUseAtomSpecifiedColor(true);
+	     renderConfigs.getMoleculeDisplayConfigs().setDefChargeMarkType(3);
+	     viewer.setEditorProperties({'renderConfigs': renderConfigs});
+	     
+	     
+	     var vrenderConfigs = viewer.getRenderConfigs();
+	     vrenderConfigs.getColorConfigs().setUseAtomSpecifiedColor(true);
+	     vrenderConfigs.getMoleculeDisplayConfigs().setDefChargeMarkType(3);
+		 
+	     var BNS = Kekule.ChemWidget.ComponentWidgetNames;
 		  
-		  ]);
-  
+         viewer.setEditorProperties({
+                  'commonToolButtons': [BNS.newDoc, BNS.undo, BNS.redo, BNS.copy, BNS.cut, BNS.paste,
+                BNS.zoomIn, BNS.zoomOut], 
+                          'chemToolButtons': [
+                  BNS.manipulate,
+                  BNS.erase,
+                  {'name': 'Custom', 'actionClass': Kekule.Editor.ActionOnComposerAdv,
+                    'text': 'Create', 'hint': 'Add atoms and bonds', 'id': 'btnMyCreate', 'htmlClass': 'MYBUTTON',
+                    'widget': Kekule.Widget.RadioButton,
+                    'attached': [
+                    BNS.molRepMethane, BNS.molBondSingle, BNS.molBondDouble, BNS.molBondTriple, BNS.molBondWedgeUp, BNS.molBondWedgeDown,
+                    BNS.molAtom
+                  ]},
+                  BNS.molRing,
+                  {
+                    'name': BNS.molCharge,
+                    'attached': [
+                      BNS.molChargeClear,
+                      BNS.molChargePositive,
+                      BNS.molChargeNegative,
+                      BNS.molElectronLonePair,
+                      BNS.molRadicalDoublet
+                    ]
+                  }
+                ]
+                 });
+                 
+                 
+                 
+                 
         var mol = new Kekule.Molecule();
+
         viewer.setChemObj(mol);
-      }
+		                 
+    
+     
     };
     
     
     function addDropStructure()
     {
-        console.log("ADD ADROP Struct");
         var d = new Date();
         var uid = d.valueOf();
     
-	    $("#dd-dropable").append('<li class="ui-state-default"><div class="structure" id="viewerProduct'+uid+'" data-widget="Kekule.ChemWidget.Viewer2D" data-predefined-setting="editOnly" data-auto-size="true"></div><input class="provided-cntrl" type="checkbox" id="p'+uid+'"></li>');
+	$("#dd-dropable").append('<li class="syn_notprovided ui-state-default"><div class="structure" id="viewerProduct'+uid+'" data-widget="Kekule.ChemWidget.Viewer2D" data-predefined-setting="editOnly" data-auto-size="true" data-auto-fit="true"></div></li>');
 	
-        //function prepareViewer(id, type, hidecntrls=false, editbtn=true, deletebtn=true)	
-	    prepareDropableViewer("viewerProduct"+uid, "structure", false);
+    //function prepareViewer(id, type, hidecntrls=false, editbtn=true, deletebtn=true)	
+	prepareDropableViewer("viewerProduct"+uid, "structure", false);
 
     }
 		
+
+    function deleteViewer(id)
+    {
+
+      $( "#"+id ).parent().remove();
+      
+    };
+
+
 		
     function init()
     {
