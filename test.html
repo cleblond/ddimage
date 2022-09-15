@@ -17,6 +17,9 @@
     border: 2px dashed red;
     width: 100px;
     height: 100px;
+    z-index: 100;
+    background-color: coral;
+        border-radius: 20px;
     }
        
     
@@ -30,6 +33,7 @@
     left: 0; 
  }
 
+/*
  #syn-container{ 
     height: 100%; 
     
@@ -43,12 +47,14 @@
     border-radius: 20px;
 
 }
+*/
 
 .dragable-span {
 
 
     border: 2px dashed #15cf15;
     border-radius: 20px;
+
 
 } 
 
@@ -65,6 +71,7 @@
     border-radius: 20px;
     }
     
+    /*
     .syn-path-container {
     min-height: 200px;
     border: 3px dotted #ccc;
@@ -73,38 +80,28 @@
     padding: 10px;
     
     }
+    */
     
     #dd-dropable li { margin: 3px 3px 3px 10px; padding: 1px; float: left; /*width: 100px; height: 90px;*/ font-size: 4em; text-align: center; }
-    #reagents { list-style-type: none; margin: 0; padding: 0; /*width: 450px;*/ }
-    #reagents li { margin: 3px 3px 3px 10px; padding: 1px; float: left; /*width: 100px; height: 90px;*/ font-size: 4em; text-align: center; }
     
-
-    .syn-path 
     
-    { 
-    display: flex;
-    flex-wrap:wrap;
-    list-style-type: none;
-    margin: 10px;
-    padding: 10px;
-    /*width: 100%;*/
-    min-height: 200px;
-    border: 3px dotted #ccc;
-    border-radius: 20px;
-    }
+    /*
+    #reagents { list-style-type: none; margin: 0; padding: 0;  }
+    #reagents li { margin: 3px 3px 3px 10px; padding: 1px; float: left; font-size: 4em; text-align: center; }
+    */
 
-.clear {
-    clear: both;
-}
 
-    .syn-path li { margin: 3px 3px 3px 10px; padding: 1px; float: left; /*width: 100px; height: 90px;*/ font-size: 4em; text-align: center; }
+
+
+
+    /*.syn-path li { margin: 3px 3px 3px 10px; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; }*/
     
 
     .structure
     {
       cursor: pointer;
-      width: 150px;
-      height: 150px;
+      width: 100px;
+      height: 100px;
       border-radius: 20px;
 
     }
@@ -184,7 +181,7 @@ $( document).ready(function() {
     var viewerAnswerIds = ['viewerProduct1'];
     
     
-    function prepareDropableViewer(id, type, hidecntrls=false, editbtn=true, deletebtn=true)
+    function prepareDropableViewer(id, hidecntrls=false, editbtn=true, deletebtn=true)
     {
     
     var viewerId = id;
@@ -192,9 +189,9 @@ $( document).ready(function() {
     
 
 			viewer
-			.setEnableEdit(true)
-			.setEnableToolbar(true)
-			.setEnableDirectInteraction(true)
+			.setEnableEdit(false)
+			.setEnableToolbar(false)
+			.setEnableDirectInteraction(false)
 			.setToolButtons(['openEditor',
 				  {
 				    'text': 'Custom',  // button caption
@@ -219,6 +216,8 @@ $( document).ready(function() {
 		 
 	     var BNS = Kekule.ChemWidget.ComponentWidgetNames;
 		  
+		  
+		 /* 
          viewer.setEditorProperties({
                   'commonToolButtons': [BNS.newDoc, BNS.undo, BNS.redo, BNS.copy, BNS.cut, BNS.paste,
                 BNS.zoomIn, BNS.zoomOut], 
@@ -246,7 +245,7 @@ $( document).ready(function() {
                 ]
                  });
                  
-                 
+           */      
                  
                  
         var mol = new Kekule.Molecule();
@@ -257,7 +256,7 @@ $( document).ready(function() {
      
     };
     
-    
+    /*
     function addDropStructure()
     {
         var d = new Date();
@@ -267,9 +266,7 @@ $( document).ready(function() {
 	
 		$("#img-container").append('<span  class="dropable-span"></span>');
 		
-	    
-	    
-	    //$("#img-container").append('<span draggable="true" class="syn_notprovided dropable-span" style="width:150px;height:150px"  id="viewerProduct'+uid+'" data-widget="Kekule.ChemWidget.Viewer2D" data-predefined-setting="editOnly" data-autofit="true"></span>');
+
 		
 		
 		
@@ -302,15 +299,33 @@ $( document).ready(function() {
 	prepareDropableViewer("viewerProduct"+uid, "structure", false);
 
     }
-		
+    */
 
+
+    /*
     function deleteViewer(id)
     {
 
       $( "#"+id ).remove();
       
     };
+    */
+    
+    
+    function randomString(length) {
+        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('');
 
+        if (! length) {
+            length = Math.floor(Math.random() * chars.length);
+        }
+
+        var str = '';
+        for (var i = 0; i < length; i++) {
+            str += chars[Math.floor(Math.random() * chars.length)];
+        }
+        return str;
+    }
+    
 
 
     function addStructureKjs(kjs, hidecntrls=false, editbtn=true, deletebtn=true)
@@ -321,10 +336,11 @@ $( document).ready(function() {
         var providedstyle = editbtn ? 'syn_notprovided' : 'syn_provided';
         //if (editbtn)
         
-	    $("#dd-dropable").append('<span draggable="true" class="dragable-span"  id="viewerProduct'+uid+'" data-widget="Kekule.ChemWidget.Viewer2D" data-predefined-setting="editOnly" data-auto-size="true"><span>');
+	    $("#dd-dropable").append('<span draggable="true" class="dragable-span"  style="width: 100px; height: 100px" id="viewerProduct'+uid+'" data-widget="Kekule.ChemWidget.Viewer2D" data-predefined-setting="editOnly" ><span>');
 	    
 
         $( ".dragable-span" ).draggable({
+              revert: true,
               drop: function( event, ui ) {
                     console.log("droped");
                 }
@@ -332,7 +348,7 @@ $( document).ready(function() {
 
 
 	    var id="viewerProduct"+uid
-	    prepareDropableViewer(id, "structure", hidecntrls, editbtn, deletebtn);
+	    prepareDropableViewer(id, hidecntrls, editbtn, deletebtn);
         //console.log(kjs);
 	    loadKjs(kjs, id);
     }
@@ -358,43 +374,49 @@ $( document).ready(function() {
     {
          
          
+             
+         var readdata = JSON.parse(data);
+             
+         for (let i = 0; i < readdata.drops.length; i++) {
+            console.log(readdata.drops[i]);
+            //text += cars[i] + "<br>";
+            $("#img-container").append('<span style="left:'+readdata.drops[i].left+'px; top:'+readdata.drops[i].top+'px" class="dropable-span"></span>');
+            //$("#img-container").append('<span>', {'style': {'left': readdata.drops[i].left, 'top': readdata.drops[i].top}});
+            
+            $( ".dropable-span" ).droppable({
+                  drop: function( event, ui ) {
+                        console.log("droped");
+                        console.log(ui.draggable);
+                        console.log(event.target);
+                         
+                        console.log(ui);
+                        
+                        var dropped = ui.draggable;
+                        var droppedOn = $(this);
+                        $(dropped).detach().css({top: 0,left: 0}).appendTo(droppedOn);
+                        
+                        
+                        
+                        
+                    }
+            });
+            
+            
+            
          
-     var readdata = JSON.parse(data);
+         }
          
-     for (let i = 0; i < readdata.drops.length; i++) {
-        console.log(readdata.drops[i]);
-        //text += cars[i] + "<br>";
-        $("#img-container").append('<span style="left:'+readdata.drops[i].left+'px; top:'+readdata.drops[i].top+'px" class="dropable-span"></span>');
-        //$("#img-container").append('<span>', {'style': {'left': readdata.drops[i].left, 'top': readdata.drops[i].top}});
-        
-        $( ".dropable-span" ).droppable({
-              drop: function( event, ui ) {
-                    console.log("droped");
-                    console.log(ui.draggable);
-                    console.log(event.target);
-                     
-                    console.log(ui);
-                    
-                    
-                }
-        });
-        
-        
-        
-     
-     }
-     
-     
-     for (let i = 0; i < readdata.drags.length; i++) {
-        console.log(readdata.drags[i]);
-        
-        
-        addStructureKjs(JSON.stringify(readdata.drags[i]), hidecntrls=false, editbtn=true, deletebtn=true);
-        
-        //prepareDropableViewer("viewerProduct"+uid, "structure", false);
+         
+         for (let i = 0; i < readdata.drags.length; i++) {
+            console.log(readdata.drags[i]);
+            
+            
+            addStructureKjs(JSON.stringify(readdata.drags[i]), hidecntrls=false, editbtn=true, deletebtn=true);
+            
+            //prepareDropableViewer("viewerProduct"+uid, "structure", false);
 
-     
-     }
+         
+         }
          
 
 
