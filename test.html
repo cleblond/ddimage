@@ -14,15 +14,39 @@
       
     .dropable-span {
     position: absolute;
-    border: 2px dashed red;
-    width: 100px;
-    height: 100px;
+    border: 2px dashed green;
+    width: 104px;
+    height: 104px;
     z-index: 100;
-    background-color: coral;
-        border-radius: 20px;
+    /*background-color: white;*/
+    border-radius: 5px;
+    }
+    
+    .dropable-text {
+    position: absolute;
+    border: 2px dashed green;
+    
+    text-align: center;
+    width: 10em;
+    height: 1em; 
+        z-index: 100;
+    /*background-color: white;*/
+    border-radius: 5px;
+    }
+    
+    
+    .dropable-text .dragable-text {
+       border: none;
+    
+    }
+    
+    
+    .dropable-span .dragable-span {
+       border: none;
+    
     }
        
-    
+/*
 #syn.fullscreen{
     z-index: 9999;
     background: #FFF;
@@ -32,6 +56,7 @@
     top: 0; 
     left: 0; 
  }
+ */
 
 /*
  #syn-container{ 
@@ -52,13 +77,28 @@
 .dragable-span {
 
 
-    border: 2px dashed #15cf15;
-    border-radius: 20px;
+    border: 2px dashed blue;
+    border-radius: 5px;
+    /*margin: 20px!important;*/
 
+
+}
+
+
+.dragable-text {
+
+
+    border: 1px solid blue;
+    border-radius: 5px;
+    /*margin: 20px!important;*/
 
 } 
 
-    #dd-dropable 
+    #dd-dragable span.dragable-span {
+        margin: 10px;
+    }
+    
+    #dd-dragable 
     
     { 
     display: flex;
@@ -82,7 +122,7 @@
     }
     */
     
-    #dd-dropable li { margin: 3px 3px 3px 10px; padding: 1px; float: left; /*width: 100px; height: 90px;*/ font-size: 4em; text-align: center; }
+    /*#dd-dragable li { margin: 3px 3px 3px 10px; padding: 1px; float: left; font-size: 4em; text-align: center; } */
     
     
     /*
@@ -160,7 +200,7 @@
 	
 	<script>
 	
-	   var data = '{"drags":[{"coordPos2D":0,"coordPos3D":0,"renderOptions":{"expanded":true,"__type__":"object"},"coord2D":{"x":13.923666666666666,"y":45.21366666666667,"__type__":"object"},"charge":0,"parity":null,"ctab":{"nodes":[{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":0,"y":-0.8000000000000043,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":0.6928203230275489,"y":-0.3999999999999986,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":0.6928203230275489,"y":0.3999999999999986,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":0,"y":0.7999999999999972,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":-0.6928203230275507,"y":0.3999999999999986,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":-0.6928203230275507,"y":-0.3999999999999986,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"}],"anchorNodes":[],"connectors":[{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedObjs":[0,1]},{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedObjs":[1,2]},{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedObjs":[2,3]},{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedObjs":[3,4]},{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedObjs":[4,5]},{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedObjs":[5,0]}],"__type__":"Kekule.StructureConnectionTable"},"__type__":"Kekule.Molecule"},{"coordPos2D":0,"coordPos3D":0,"renderOptions":{"expanded":true,"__type__":"object"},"coord2D":{"x":13.881,"y":45.02166666666667,"__type__":"object"},"charge":0,"parity":null,"ctab":{"nodes":[{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":0,"y":-0.8000000000000043,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":0.6928203230275507,"y":-0.3999999999999986,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":0.6928203230275507,"y":0.3999999999999986,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":0,"y":0.7999999999999972,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":-0.6928203230275525,"y":0.3999999999999986,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":-0.6928203230275525,"y":-0.3999999999999986,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"}],"anchorNodes":[],"connectors":[{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"bondType":"covalent","bondOrder":2,"electronCount":4,"isInAromaticRing":false,"connectedObjs":[0,1]},{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedObjs":[1,2]},{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"bondType":"covalent","bondOrder":2,"electronCount":4,"isInAromaticRing":false,"connectedObjs":[2,3]},{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedObjs":[3,4]},{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"bondType":"covalent","bondOrder":2,"electronCount":4,"isInAromaticRing":false,"connectedObjs":[4,5]},{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedObjs":[5,0]}],"__type__":"Kekule.StructureConnectionTable"},"__type__":"Kekule.Molecule"}],"drops":[{"top":141,"left":56},{"top":133,"left":292}]}';
+	   var data = '{"vid":["SMfxxNFGP","TcRQUQCeT"],"drags":[{"coordPos2D":0,"coordPos3D":0,"renderOptions":{"expanded":true,"__type__":"object"},"coord2D":{"x":13.774333333333333,"y":43.848333333333336,"__type__":"object"},"charge":0,"parity":null,"ctab":{"nodes":[{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":0,"y":-0.7999999999999972,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":0.6928203230275489,"y":-0.3999999999999986,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":0.6928203230275489,"y":0.3999999999999986,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":0,"y":0.7999999999999972,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":-0.6928203230275507,"y":0.3999999999999986,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"},{"__type__":"Kekule.Atom","coordPos2D":0,"coordPos3D":0,"coord2D":{"x":-0.6928203230275507,"y":-0.3999999999999986,"__type__":"object"},"charge":0,"parity":null,"isotopeId":"C"}],"anchorNodes":[],"connectors":[{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedObjs":[0,1]},{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedObjs":[1,2]},{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedObjs":[2,3]},{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedObjs":[3,4]},{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedObjs":[4,5]},{"__type__":"Kekule.Bond","coordPos2D":0,"coordPos3D":0,"parity":null,"bondType":"covalent","bondOrder":1,"electronCount":2,"isInAromaticRing":false,"connectedObjs":[5,0]}],"__type__":"Kekule.StructureConnectionTable"},"__type__":"Kekule.Molecule"},"Click to Add!"],"drops":[{"top":50,"left":50},{"top":132,"left":284}]}';
 	
 	
 	
@@ -189,6 +229,7 @@ $( document).ready(function() {
     
 
 			viewer
+			.setBackgroundColor('#ffffff')
 			.setEnableEdit(false)
 			.setEnableToolbar(false)
 			.setEnableDirectInteraction(false)
@@ -262,7 +303,7 @@ $( document).ready(function() {
         var d = new Date();
         var uid = d.valueOf();
     
-	    $("#dd-dropable").append('<span draggable="true" class="dragable-span" style="width:150px;height:150px"  id="viewerProduct'+uid+'" data-widget="Kekule.ChemWidget.Viewer2D" data-predefined-setting="editOnly" data-autofit="true"></span>');
+	    $("#dd-dragable").append('<span draggable="true" class="dragable-span" style="width:150px;height:150px"  id="viewerProduct'+uid+'" data-widget="Kekule.ChemWidget.Viewer2D" data-predefined-setting="editOnly" data-autofit="true"></span>');
 	
 		$("#img-container").append('<span  class="dropable-span"></span>');
 		
@@ -312,6 +353,8 @@ $( document).ready(function() {
     */
     
     
+    /*
+    
     function randomString(length) {
         var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('');
 
@@ -325,18 +368,35 @@ $( document).ready(function() {
         }
         return str;
     }
-    
+    */
 
 
-    function addStructureKjs(kjs, hidecntrls=false, editbtn=true, deletebtn=true)
+
+    function addTexttoSpan(vid, text) {
+
+
+	    $("#dd-dragable").append('<span draggable="true" class="dragable-text" id="'+vid+'">'+text+'<span>');
+
+        $( ".dragable-text" ).draggable({
+              revert: true,
+              drop: function( event, ui ) {
+                    console.log("droped");
+                }
+        });
+
+
+    }
+
+
+    function addStructureKjs(vid, kjs, hidecntrls=false, editbtn=true, deletebtn=true)
     {
         //console.log(kjs);
-        var d = new Date();
-        var uid = d.valueOf();
-        var providedstyle = editbtn ? 'syn_notprovided' : 'syn_provided';
+        //var d = new Date();
+        //var uid = d.valueOf();
+        //var providedstyle = editbtn ? 'syn_notprovided' : 'syn_provided';
         //if (editbtn)
         
-	    $("#dd-dropable").append('<span draggable="true" class="dragable-span"  style="width: 100px; height: 100px" id="viewerProduct'+uid+'" data-widget="Kekule.ChemWidget.Viewer2D" data-predefined-setting="editOnly" ><span>');
+	    $("#dd-dragable").append('<span draggable="true" class="dragable-span"  style="width: 100px; height: 100px" id="'+vid+'" data-widget="Kekule.ChemWidget.Viewer2D" data-predefined-setting="editOnly" ><span>');
 	    
 
         $( ".dragable-span" ).draggable({
@@ -347,10 +407,10 @@ $( document).ready(function() {
         });
 
 
-	    var id="viewerProduct"+uid
-	    prepareDropableViewer(id, hidecntrls, editbtn, deletebtn);
+	    
+	    prepareDropableViewer(vid, hidecntrls, editbtn, deletebtn);
         //console.log(kjs);
-	    loadKjs(kjs, id);
+	    loadKjs(kjs, vid);
     }
 
 
@@ -380,44 +440,93 @@ $( document).ready(function() {
          for (let i = 0; i < readdata.drops.length; i++) {
             console.log(readdata.drops[i]);
             //text += cars[i] + "<br>";
-            $("#img-container").append('<span style="left:'+readdata.drops[i].left+'px; top:'+readdata.drops[i].top+'px" class="dropable-span"></span>');
-            //$("#img-container").append('<span>', {'style': {'left': readdata.drops[i].left, 'top': readdata.drops[i].top}});
             
-            $( ".dropable-span" ).droppable({
-                  drop: function( event, ui ) {
-                        console.log("droped");
-                        console.log(ui.draggable);
-                        console.log(event.target);
-                         
-                        console.log(ui);
+            var vid = readdata.vid[i];
+            
+            if (readdata.vid[i].charAt(0) == 'S') { //must be a kekule
+            
+            
+                    $("#img-container").append('<span style="left:'+readdata.drops[i].left+'px; top:'+readdata.drops[i].top+'px" class="dropable-span"></span>');
+                    //$("#img-container").append('<span>', {'style': {'left': readdata.drops[i].left, 'top': readdata.drops[i].top}});
+                    
+                    $( ".dropable-span" ).droppable({
+                          drop: function( event, ui ) {
+                                console.log("droped");
+                                console.log(ui.draggable);
+                                console.log(event.target);
+                                 
+                                console.log(ui);
+                                
+                                var dropped = ui.draggable;
+                                var droppedOn = $(this);
+                                $(dropped).detach().css({top: 0,left: 0}).appendTo(droppedOn);
+
+                                
+                            }
+                    });
+                    
+                    
+                    
+            
+                    addStructureKjs(vid, JSON.stringify(readdata.drags[i]), hidecntrls=false, editbtn=true, deletebtn=true);
+
+                    
+            } else {
+            
+                 $("#img-container").append('<span style="left:'+readdata.drops[i].left+'px; top:'+readdata.drops[i].top+'px" class="dropable-text"></span>');
+
+
+                 $( ".dropable-text" ).droppable({
+                          drop: function( event, ui ) {
+                                console.log("droped");
+                                console.log(ui.draggable);
+                                console.log(event.target);
+                                 
+                                console.log(ui);
+                                
+                                var dropped = ui.draggable;
+                                var droppedOn = $(this);
+                                $(dropped).detach().css({top: 0,left: 0}).appendTo(droppedOn);
+
+                                
+                            }
+                    });
+
+            
+                 addTexttoSpan(vid, readdata.drags[i]);
+            
+            
+            }
+            
+            //img-container
+            $( "#dd-dragable" ).droppable({
+                    drop: function( event, ui ) {
                         
                         var dropped = ui.draggable;
                         var droppedOn = $(this);
                         $(dropped).detach().css({top: 0,left: 0}).appendTo(droppedOn);
-                        
-                        
-                        
-                        
                     }
             });
-            
             
             
          
          }
          
          
+         
+         /*
          for (let i = 0; i < readdata.drags.length; i++) {
             console.log(readdata.drags[i]);
             
+            var vid = readdata.vid[i];
             
-            addStructureKjs(JSON.stringify(readdata.drags[i]), hidecntrls=false, editbtn=true, deletebtn=true);
+            addStructureKjs(vid, JSON.stringify(readdata.drags[i]), hidecntrls=false, editbtn=true, deletebtn=true);
             
             //prepareDropableViewer("viewerProduct"+uid, "structure", false);
 
          
          }
-         
+         */
 
 
         
@@ -427,36 +536,31 @@ $( document).ready(function() {
   
   
   
-  $("#save").click(function(){
+  $("#getresponse").click(function(){
 
 
-       console.log("Save");
-       var drops = [];
-       $('.dropable-span').each(function( index, value ) {
-            console.log($(this).position());
-            drops.push($(this).position());
-            
+       console.log("Get Response");
        
-       });
+      
    
    
        var drags = [];
-       $('.dragable-span').each(function( index, value ) {
+       $('.dragable-span, .dragable-text').each(function( index, value ) {
             console.log(this.id);
-            //var chemViewer = new Kekule.ChemWidget.Viewer(document.getElementById(this.id));
             
+            
+            //var chemViewer = new Kekule.ChemWidget.Viewer(document.getElementById(this.id));
+            /*
             var viewer = Kekule.Widget.getWidgetById(this.id);
 	        var molecule = viewer.getChemObj();
 			var kjs = Kekule.IO.saveFormatData(molecule, 'Kekule-JSON');
             //console.log(kjs);
             drags.push(kjs);
-            
+            */
        
        });
    
-       console.log(drags);
-       console.log(drops);
-   
+       
 
 });
   
@@ -483,14 +587,14 @@ $( document).ready(function() {
     <img id="bgimage" src = "monosubstituted_arenes.png" />
     </div>
 
-    <div id="dd-dropable" class="center">
+    <div id="dd-dragable" class="center">
 
     </div>
 
 
     <div class="btn-group btn-group-sm" role="group" aria-label="...">
     
-    <button class="btn btn-default" id="save">Save</button>
+    <button class="btn btn-default" id="getresponse">Get Response</button>
     </div>
 </body>
 </html>

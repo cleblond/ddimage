@@ -14,27 +14,10 @@
       
     .dropable-span {
     position: absolute;
-    border: 4px dashed red;
-    width: 104px;
-    height: 104px;
-    z-index: 100;
-    /*background-color: white;*/
-    border-radius: 10px;
+    border: 2px dashed red;
+    width: 100px;
+    height: 100px;
     }
-    
-    
-    .dropable-text {
-    position: absolute;
-    border: 4px dashed red;
-    
-    text-align: center;
-    width: 10em;
-    height: 1em; 
-        z-index: 100;
-    /*background-color: white;*/
-    border-radius: 5px;
-    }
-    
        
     
 #syn.fullscreen{
@@ -56,7 +39,7 @@
 .syn_provided {
 
 
-    border: 1px solid blue;
+    border: 2px dashed blue;
     border-radius: 20px;
 
 }
@@ -64,25 +47,12 @@
 .dragable-span {
 
 
-    border: 2px dashed blue;
-    border-radius: 10px;
-    /*margin: 20px!important;*/
+    border: 2px dashed #15cf15;
+    border-radius: 20px;
 
 } 
 
-.dragable-text {
-
-
-    border: 1px solid blue;
-    border-radius: 5px;
-    /*margin: 20px!important;*/
-
-} 
-
-
-
-
-    #dd-dragable 
+    #dd-dropable 
     
     { 
     display: flex;
@@ -93,12 +63,6 @@
     min-height: 200px;
     border: 1px dotted #ccc;
     border-radius: 20px;
-    }
-    
-    
-    #dd-dragable span.dragable-span {
-    
-    margin: 10px;
     }
     
     .syn-path-container {
@@ -203,26 +167,12 @@ $( document).ready(function() {
 	//console.log("INITED");	
 		
 		
-    	
+    $( ".dropable-span" ).draggable();	
 		
 		
 		
-    function randomString(length) {
-        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('');
-
-        if (! length) {
-            length = Math.floor(Math.random() * chars.length);
-        }
-
-        var str = '';
-        for (var i = 0; i < length; i++) {
-            str += chars[Math.floor(Math.random() * chars.length)];
-        }
-        return str;
-    }
-    
+		
     var viewerAnswerIds = ['viewerProduct1'];
-    
     
     function prepareDropableViewer(id, type, hidecntrls=false, editbtn=true, deletebtn=true)
     {
@@ -232,10 +182,9 @@ $( document).ready(function() {
     
 
 			viewer
-			.setBackgroundColor('#ffffff')
 			.setEnableEdit(true)
 			.setEnableToolbar(true)
-			.setEnableDirectInteraction(false)
+			.setEnableDirectInteraction(true)
 			.setToolButtons(['openEditor',
 				  {
 				    'text': 'Custom',  // button caption
@@ -299,67 +248,14 @@ $( document).ready(function() {
     };
     
     
-    function addDropText()
-    {
-       
-       
-        var uid = 'T'+randomString(8);
-       
-        $("#dd-dragable").append('<span draggable="true" class="dragable-text" id="'+uid+'">Click to Add!</span>');
-	
-		$("#img-container").append('<span style="top:25px;left:25px" class="dropable-text"></span>');
-		
-	
-	    $(".dropable-text").droppable({
-		                drop: function( event, ui ) {
-                        console.log("droped");
-                        console.log(ui.draggable);
-                        console.log(event.target);
-                         
-                        console.log(ui);
-                        
-                        var dropped = ui.draggable;
-                        var droppedOn = $(this);
-                        $(dropped).detach().css({top: 0,left: 0}).appendTo(droppedOn);
-                        
-                        }
-		
-		});
-		
-		$( ".dragable-text" ).draggable({
-		
-		      revert: true,
-              drop: function( event, ui ) {
-                    console.log("droped");
-                }
-		});
-		
-		
-		
-		$('.dragable-text').bind('dblclick',
-               function(){
-                   $(this).attr('contentEditable',true);
-        });
-    
-        $( ".dropable-text" ).draggable();
-
-    
-    
-    
-    
-    
-    }
-    
     function addDropStructure()
     {
-        //var d = new Date();
-        //var uid = d.valueOf();
-        var uid = 'S'+randomString(8);
-        
+        var d = new Date();
+        var uid = d.valueOf();
     
-	    $("#dd-dragable").append('<span draggable="true" class="dragable-span" style="width:100px;height:100px"  id="'+uid+'" data-widget="Kekule.ChemWidget.Viewer2D" data-predefined-setting="editOnly" data-auto-fit="true"></span>');
+	    $("#dd-dropable").append('<span draggable="true" class="dragable-span" style="width:150px;height:150px"  id="viewerProduct'+uid+'" data-widget="Kekule.ChemWidget.Viewer2D" data-predefined-setting="editOnly" data-autofit="true"></span>');
 	
-		$("#img-container").append('<span style="top:50px;left:50px" class="dropable-span"></span>');
+		$("#img-container").append('<span  class="dropable-span"></span>');
 		
 	    
 	    
@@ -368,37 +264,32 @@ $( document).ready(function() {
 		
 		
 		
-		$(".dropable-span").droppable({
-		                drop: function( event, ui ) {
-                        console.log("droped");
-                        console.log(ui.draggable);
-                        console.log(event.target);
-                         
-                        console.log(ui);
-                        
-                        var dropped = ui.draggable;
-                        var droppedOn = $(this);
-                        $(dropped).detach().css({top: 0,left: 0}).appendTo(droppedOn);
-                        
-                        }
+		$( ".dropable-span" ).draggable({
 		
-		});
-		
-		
-		
+		  start: function() {
+          //counts[ 0 ]++;
+          //updateCounterStatus( $start_counter, counts[ 0 ] );
+          },
+          drag: function() {
+            //counts[ 1 ]++;
+            //updateCounterStatus( $drag_counter, counts[ 1 ] );
+          },
+          stop: function(e) {
+          
+            console.log(e);
+            console.log(e.target.id);
+            //counts[ 2 ]++;
+            //updateCounterStatus( $stop_counter, counts[ 2 ] );
 
-		$( ".dragable-span" ).draggable({
+            
+            
+          }
 		
-		      revert: true,
-              drop: function( event, ui ) {
-                    console.log("droped");
-                }
+		
 		});
-		
-		$( ".dropable-span" ).draggable();
 	
     //function prepareViewer(id, type, hidecntrls=false, editbtn=true, deletebtn=true)	
-	prepareDropableViewer(uid, "structure", false);
+	prepareDropableViewer("viewerProduct"+uid, "structure", false);
 
     }
 		
@@ -417,29 +308,12 @@ $( document).ready(function() {
          
     //If it isn't "undefined" and it isn't "null", then it exists.
         var dropbtn = document.getElementById("btnAddDropStructure");
-        //console.log(dropbtn);
+        console.log(dropbtn);
 
-              //console.log(Kekule.Widget.getWidgetById());
-              //console.log(Kekule.Widget.getWidgetById("btnAddDropStructure"));
-              
+              console.log(Kekule.Widget.getWidgetById());
+              console.log(Kekule.Widget.getWidgetById("btnAddDropStructure"));
               Kekule.Widget.getWidgetById('btnAddDropStructure').addEventListener('execute', addDropStructure);
               Kekule.Widget.getWidgetById('btnAddDropStructure').htmlClassName = "btn btn-default";
-              
-              Kekule.Widget.getWidgetById('btnAddDropText').addEventListener('execute', addDropText);
-              Kekule.Widget.getWidgetById('btnAddDropText').htmlClassName = "btn btn-default";
-
-
-
-            //img-container
-            $( "#dd-dragable" ).droppable({
-                    drop: function( event, ui ) {
-                        
-                        var dropped = ui.draggable;
-                        var droppedOn = $(this);
-                        $(dropped).detach().css({top: 0,left: 0}).appendTo(droppedOn);
-                    }
-            });
-
 
         
     }
@@ -453,32 +327,26 @@ $( document).ready(function() {
 
        console.log("Save");
        var drops = [];
-       $('.dropable-span, .dropable-text').each(function( index, value ) {
+       $('.dropable-span').each(function( index, value ) {
             //console.log($(this).position());
             drops.push($(this).position());
        
        });
        var drags = [];
-       var vid = [];
-       $('.dragable-span, .dragable-text').each(function( index, value ) {
+       $('.dragable-span').each(function( index, value ) {
             console.log(this.id);
             //var chemViewer = new Kekule.ChemWidget.Viewer(document.getElementById(this.id));
-            if (this.id.charAt(0) == 'S') {
+            
             var viewer = Kekule.Widget.getWidgetById(this.id);
 	        var molecule = viewer.getChemObj();
 			var kjs = Kekule.IO.saveFormatData(molecule, 'Kekule-JSON');
             //console.log(kjs);
             drags.push(JSON.parse(kjs));
-            vid.push(this.id);
-            } else {
-                vid.push(this.id);
-                drags.push(this.textContent);
             
-            }
        
        });
    
-       var data = {'vid': vid, 'drags': drags, 'drops': drops}
+       var data = {'drags': drags, 'drops': drops}
         
    
        console.log(data);
@@ -510,16 +378,13 @@ $( document).ready(function() {
     <img id="bgimage" src = "monosubstituted_arenes.png" />
     </div>
 
-    <div id="dd-dragable" class="center">
+    <div id="dd-dropable" class="center">
 
     </div>
 
 
     <div class="btn-group btn-group-sm" role="group" aria-label="...">
     <button class="btn btn-default" id="btnAddDropStructure" data-widget="Kekule.Widget.Button" data-text="<i class='fa fa-plus' aria-hidden='true'></i> Structure"></button>
-    
-    <button class="btn btn-default" id="btnAddDropText" data-widget="Kekule.Widget.Button" data-text="<i class='fa fa-plus' aria-hidden='true'></i> Text"></button>
-    
     <button class="btn btn-default" id="save">Save</button>
     </div>
 </body>
